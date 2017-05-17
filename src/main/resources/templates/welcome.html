@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Meteo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="refresh" content="3600" />
+<link rel="stylesheet" th:href="@{/css/main.css}"
+	href="../../css/main.css" />
+
+</head>
+<body>
+
+	<div class="container">
+
+		<div class="starter-template">
+
+			<table>
+				<thead>
+					<tr class="text">
+						<td></td>
+						<td>3h</td>
+						<td>6h</td>
+						<td>9h</td>
+						<td>12h</td>
+						<td>15h</td>
+						<td>18h</td>
+						<td>21h</td>
+						<td>0h</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="forecastedDay: ${forecastedDays}">
+
+						<td class="text days" th:text="${forecastedDay.day}">Date</td>
+
+						<td th:each="forecast: ${forecastedDay.forecasts}">
+							<div>
+								<div>
+									<img th:src="${forecast.icon}" />
+								</div>
+								<div class="text temp">
+									<span th:text="${forecast.temp}"></span>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</body>
+
+</html>
