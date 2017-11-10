@@ -19,9 +19,6 @@ public class WelcomeController {
 
 	@RequestMapping("/meteo")
 	public String welcome(Model model) {
-		
-//		CurrentDay currentDay = weatherService.getCurrentDay();
-//		model.addAttribute("currentDay", currentDay);
 
 		List<DayForecasts> forecastedDays = new ArrayList<>();
 		forecastedDays.addAll(weatherService.getDayPlus());

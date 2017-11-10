@@ -34,13 +34,14 @@ public class ForecastWeatherDaoImpl extends AbstractDao implements ForecastWeath
 		RestTemplate restTemplate = new RestTemplate();
 		ForecastRoot forecastRestTemplate = restTemplate.getForObject(forecast_uri, ForecastRoot.class);
 		System.out.println(forecast_uri);
-		return toForecasts(forecastRestTemplate);
+		List<DayForecasts> toReturn = toForecasts(forecastRestTemplate);
+		return toReturn;
 	}
 
 	private List<DayForecasts> toForecasts(ForecastRoot forecast) {
 		//
 		List<DayForecasts> dayForecasts = new ArrayList<>();
-		Map<String,List<ForecastForHour>> hourForecasts = new TreeMap<String,List<ForecastForHour>>();
+		Map<String,ForecastForHour[]> hourForecasts = new TreeMap<>();
 		//
 		for (WeatherRoot w : forecast.getWeatherRoots()) {
 			//
@@ -49,42 +50,18 @@ public class ForecastWeatherDaoImpl extends AbstractDao implements ForecastWeath
 			String laDate = getLongDate(forecastForHour.getDate());
 			//
 			if(!hourForecasts.containsKey(laDate)){
-				hourForecasts.put(laDate, new ArrayList<>());
+				hourForecasts.put(laDate, new ForecastForHour[8]);
 			}
-			hourForecasts.get(laDate).add(forecastForHour);
+			int index = forecastForHour.getHour()/3;
+			hourForecasts.get(laDate)[index] = forecastForHour;
 		}
-		//
-		fillMissing(hourForecasts);
 		//
 		for(String date : hourForecasts.keySet()){
 			String day = date.split("_")[1];
-			dayForecasts.add(new DayForecasts(day, hourForecasts.get(date)));	
+			dayForecasts.add(new DayForecasts(day, hourForecasts.get(date)));
 		}
 		//
 		return dayForecasts;
-	}
-
-	@SuppressWarnings("unchecked")
-	private void fillMissing(Map<String, List<ForecastForHour>> hourForecasts) {
-		for(String key:hourForecasts.keySet()){ // for each day
-			List<ForecastForHour> forecasts = hourForecasts.get(key);
-			List<Integer> hours = new ArrayList<>();
-			for(ForecastForHour forecast:forecasts){
-				hours.add(forecast.getHour());
-			}
-//			System.out.println(forecasts.size());
-			for(int i=2;i<24;i=i+3){
-				if(!hours.contains(new Integer(i))){
-					forecasts.add(new ForecastForHour(i, getIconUrl("50d")));
-				}
-			}
-			Collections.sort(forecasts, new Comparator<ForecastForHour>(){
-				@Override
-				public int compare(ForecastForHour o1, ForecastForHour o2) {
-					return o1.getHour().compareTo(o2.getHour());
-				}
-			});
-		}
 	}
 
 	private LocalDateTime getMeasLocalDateTime(WeatherRoot w) {

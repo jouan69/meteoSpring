@@ -1,13 +1,11 @@
 package com.example.model.displayable;
 
-import java.util.List;
-
 public class DayForecasts {
 	
 	String day;
-	List<ForecastForHour> forecasts;
+	ForecastForHour[] forecasts = new ForecastForHour[8];
 	
-	public DayForecasts(String day, List<ForecastForHour> forecasts) {
+	public DayForecasts(String day, ForecastForHour[] forecasts) {
 		super();
 		this.day = day;
 		this.forecasts = forecasts;
@@ -25,11 +23,11 @@ public class DayForecasts {
 		this.day = day;
 	}
 
-	public List<ForecastForHour> getForecasts() {
+	public ForecastForHour[] getForecasts() {
 		return forecasts;
 	}
 
-	public void setForecasts(List<ForecastForHour> forecasts) {
+	public void setForecasts(ForecastForHour[] forecasts) {
 		this.forecasts = forecasts;
 	}
 }
