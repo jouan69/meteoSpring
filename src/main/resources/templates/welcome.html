@@ -18,14 +18,9 @@
 				<thead>
 					<tr class="text">
 						<td></td>
-						<td>3h</td>
-						<td>6h</td>
-						<td>9h</td>
-						<td>12h</td>
-						<td>15h</td>
-						<td>18h</td>
-						<td>21h</td>
-						<td>0h</td>
+						<td th:each="hour:${hours}">
+							<span th:text="${hour}"></span>
+						</td>
 					</tr>
 				</thead>
 				<tbody>

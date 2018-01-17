@@ -1,11 +1,9 @@
 package com.example.service;
 
-import com.example.model.displayable.DayForecasts;
-
-import java.util.List;
+import com.example.model.WeatherTable;
 
 public interface WeatherService {
 
-	List<DayForecasts> getDayPlus();
+	WeatherTable getDayPlus();
 
 }

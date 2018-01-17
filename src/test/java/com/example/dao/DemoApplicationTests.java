@@ -16,14 +16,12 @@ public class DemoApplicationTests {
 	@Test
 	public void weatherRoot() {
 	    RestTemplate restTemplate = new RestTemplate();
-	    WeatherRoot result = restTemplate.getForObject(CurrentWeatherDaoImpl.current_uri, WeatherRoot.class);
 	}
 
 	@Test
 	public void contextLoads() {
 	    RestTemplate restTemplate = new RestTemplate();
 	    ForecastRoot result = restTemplate.getForObject(ForecastWeatherDaoImpl.forecast_uri, ForecastRoot.class);
-	    //WeatherService.processForecast(result);
 	}
 
 }

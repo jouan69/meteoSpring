@@ -1,15 +1,11 @@
-package com.example;
+package com.example.ws;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.example.model.WeatherTable;
+import com.example.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.example.model.displayable.DayForecasts;
-import com.example.service.WeatherService;
 
 @Controller
 public class WelcomeController {
@@ -19,11 +15,9 @@ public class WelcomeController {
 
 	@RequestMapping("/meteo")
 	public String welcome(Model model) {
-
-		List<DayForecasts> forecastedDays = new ArrayList<>();
-		forecastedDays.addAll(weatherService.getDayPlus());
-		model.addAttribute("forecastedDays", forecastedDays);
-		
+		WeatherTable weatherTable = weatherService.getDayPlus();
+		model.addAttribute("forecastedDays", weatherTable.getForecasts());
+		model.addAttribute("hours", weatherTable.getHours());
 		return "welcome"; 
 	}
 
