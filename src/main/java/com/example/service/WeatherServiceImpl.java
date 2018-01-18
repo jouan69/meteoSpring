@@ -17,7 +17,7 @@ public class WeatherServiceImpl implements WeatherService{
 	ForecastWeatherDao forecastWeatherDao;
 
 	@Override
-	public WeatherTable getDayPlus() {
+	public WeatherTable getFullForecast() {
 
 		List<DayForecasts> dayForecasts  = forecastWeatherDao.getForecastDays();
 		DayForecasts tomorrow = dayForecasts.get(1);

@@ -4,6 +4,6 @@ import com.example.model.WeatherTable;
 
 public interface WeatherService {
 
-	WeatherTable getDayPlus();
+	WeatherTable getFullForecast();
 
 }

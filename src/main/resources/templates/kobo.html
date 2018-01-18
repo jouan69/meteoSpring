@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Meteo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="refresh" content="3600" />
+<link rel="stylesheet" th:href="@{/css/main.css}"
+	href="../../css/main.css" />
+
+<link rel="stylesheet" th:href="@{/css/kobo.css}"
+		  href="../../css/kobo.css" />
+</head>
+<body>
+
+	<div class="container koboFrame">
+
+		<div class="starter-template koboHour">
+
+            <div class="koboSection">
+                <span th:text="${koboWeather.now}"></span>
+
+                <div>
+                    <img th:src="${koboWeather.icon}" class="koboImg"/>
+                    <span th:text="${koboWeather.current}"></span>
+                    <span>°</span>
+                </div>
+            </div>
+
+            <div class="koboSection">
+                <span th:text="${koboWeather.tomorrow}"></span>
+
+                <div>
+                    <img th:src="${koboWeather.iconTomMorning}" class="koboImg"/>
+                    <span th:text="${koboWeather.minTomorrow}"></span>
+                    <span>° / </span>
+                    <img th:src="${koboWeather.iconTomEvening}" class="koboImg"/>
+                    <span th:text="${koboWeather.maxTomorrow}"></span>
+                    <span>°</span>
+                </div>
+            </div>
+		</div>
+	</div>
+</body>
+
+</html>

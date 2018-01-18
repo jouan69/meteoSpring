@@ -6,8 +6,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -34,8 +32,7 @@ public class ForecastWeatherDaoImpl extends AbstractDao implements ForecastWeath
         RestTemplate restTemplate = new RestTemplate();
         ForecastRoot forecastRoot = restTemplate.getForObject(forecast_uri, ForecastRoot.class);
         System.out.println(forecast_uri);
-        List<DayForecasts> toReturn = toForecasts(forecastRoot);
-        return toReturn;
+        return toForecasts(forecastRoot);
     }
 
     private List<DayForecasts> toForecasts(ForecastRoot forecast) {
@@ -61,14 +58,14 @@ public class ForecastWeatherDaoImpl extends AbstractDao implements ForecastWeath
             String key = entry.getKey();
             String shortDay = key.split("_")[1];
             // current day has holes in the past hour
-            piggyBack(entry.getValue());
+            addEmptyForecasts(entry.getValue());
             dayForecasts.add(new DayForecasts(shortDay, hourForecasts.get(key)));
         }
         //
         return dayForecasts;
     }
 
-    private void piggyBack(ForecastForHour[] value) {
+    private void addEmptyForecasts(ForecastForHour[] value) {
         for (int i = 0; i < value.length; i++) {
             if (value[i] == null) {
                 value[i] = new ForecastForHour();

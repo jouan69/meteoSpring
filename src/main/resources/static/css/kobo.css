@@ -1,0 +1,15 @@
+.koboFrame{
+	height:1024px;
+	width:768px;
+	text-align:center;
+}
+.koboHour{
+    font-size:100px;
+    font-family:sans-serif;
+}
+.koboImg{
+    width:150px;
+}
+.koboSection{
+    margin-bottom:50px;
+}
