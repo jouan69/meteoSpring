@@ -3,13 +3,19 @@
 	width:768px;
 	text-align:center;
 }
-.koboHour{
+.koboFont{
     font-size:100px;
     font-family:sans-serif;
+}
+.koboHour{
+    font-size:200px;
 }
 .koboImg{
     width:150px;
 }
 .koboSection{
     margin-bottom:50px;
+}
+.weatherSection{
+    margin:50px;
 }

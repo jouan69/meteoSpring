@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -36,14 +37,17 @@ public class KoboServiceImpl implements KoboService {
                 .findFirst()
                 .get();
 
-        String now = LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE dd/MM", Locale.FRENCH));
+
+        LocalDateTime now = LocalDateTime.now();
+        String dateNow = now.format(DateTimeFormatter.ofPattern("EE dd", Locale.FRENCH));
+        String timeNow = now.format(DateTimeFormatter.ofPattern("HH:mm", Locale.FRENCH));
+
         Integer currentTemp = nowForecast.getTemp();
         String icon = nowForecast.getIcon();
-        String description = nowForecast.getDescription();
 
         String tomorrowStr = LocalDate.now()
                                 .plusDays(1)
-                                .format(DateTimeFormatter.ofPattern("EEEE dd/MM", Locale.FRENCH));
+                                .format(DateTimeFormatter.ofPattern("EE dd", Locale.FRENCH));
 
         DayForecasts tomorrow = forecastDays.get(1);
         ForecastForHour[] tomorrowForecasts = tomorrow.getForecasts();
@@ -62,6 +66,18 @@ public class KoboServiceImpl implements KoboService {
 
         String iconTomEvening = tomorrowForecasts[5].getIcon();
 
-        return new KoboWeather(now, currentTemp, tomorrowStr, minTemp, maxTemp, icon, description, iconTomMorning, iconTomEvening);
+        KoboWeather.KoboWeatherBuilder builder = new KoboWeather.KoboWeatherBuilder();
+
+        return builder
+                .withDate(dateNow)
+                .withTime(timeNow)
+                .withCurrentTemp(currentTemp)
+                .withDateTomorrow(tomorrowStr)
+                .withMinTomorrow(minTemp)
+                .withMaxTomorrow(maxTemp)
+                .withIcon(icon)
+                .withIconTomMorning(iconTomMorning)
+                .withIconTomEvening(iconTomEvening)
+                .build();
     }
 }

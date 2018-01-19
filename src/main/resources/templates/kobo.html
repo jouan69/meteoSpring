@@ -9,18 +9,23 @@
 
 <link rel="stylesheet" th:href="@{/css/kobo.css}"
 		  href="../../css/kobo.css" />
+<script src="../../js/a.js"></script>
+
+<link href="../../css/owfont-regular.css" rel="stylesheet" type="text/css" />
+
 </head>
-<body>
+<body onload="startTime()">
 
 	<div class="container koboFrame">
 
-		<div class="starter-template koboHour">
+		<div class="starter-template koboFont">
 
             <div class="koboSection">
-                <span th:text="${koboWeather.now}"></span>
-
-                <div>
-                    <img th:src="${koboWeather.icon}" class="koboImg"/>
+                <!-- <span th:text="${koboWeather.dateNow}"></span>
+                <br /> -->
+                <span class="koboHour" id="koboHour"></span>
+                <div class="weatherSection">
+                    <i th:class="${koboWeather.icon}" class="koboImg"></i>
                     <span th:text="${koboWeather.current}"></span>
                     <span>°</span>
                 </div>
@@ -29,11 +34,11 @@
             <div class="koboSection">
                 <span th:text="${koboWeather.tomorrow}"></span>
 
-                <div>
-                    <img th:src="${koboWeather.iconTomMorning}" class="koboImg"/>
+                <div class="weatherSection">
+                    <i th:class="${koboWeather.iconTomMorning}" class="koboImg"></i>
                     <span th:text="${koboWeather.minTomorrow}"></span>
                     <span>° / </span>
-                    <img th:src="${koboWeather.iconTomEvening}" class="koboImg"/>
+                    <i th:class="${koboWeather.iconTomEvening}" class="koboImg"></i>
                     <span th:text="${koboWeather.maxTomorrow}"></span>
                     <span>°</span>
                 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="refresh" content="3600" />
 <link rel="stylesheet" th:href="@{/css/main.css}"
 	href="../../css/main.css" />
-
+<link href="../../css/owfont-regular.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -31,7 +31,7 @@
 						<td th:each="forecast: ${forecastedDay.forecasts}">
 							<div>
 								<div>
-									<img th:src="${forecast.icon}" />
+									<i th:class="${forecast.icon}"></i>
 								</div>
 								<div class="text temp">
 									<span th:text="${forecast.temp}"></span>

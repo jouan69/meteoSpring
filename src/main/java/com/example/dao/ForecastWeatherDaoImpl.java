@@ -90,7 +90,7 @@ public class ForecastWeatherDaoImpl extends AbstractDao implements ForecastWeath
         Double measTemp = w.getMainMeasurements().getTemp();
         toReturn.setTemp((measTemp == null) ? null : measTemp.intValue());
         //
-        String icon = getIconUrl(w.getWeatherEntries()[0].getIcon());
+        String icon = fontIconClass(w.getWeatherEntries()[0].getId());
         toReturn.setIcon(icon);
         //
         String descr = capitalizeFirstLetter(w.getWeatherEntries()[0].getDescription());
@@ -103,6 +103,10 @@ public class ForecastWeatherDaoImpl extends AbstractDao implements ForecastWeath
         toReturn.setWindStrength(windStrength);
         //
         return toReturn;
+    }
+
+    private String fontIconClass(Long id) {
+        return "owf owf-"+id;
     }
 
     private String getShortDate(LocalDate date) {
