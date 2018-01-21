@@ -13,34 +13,32 @@
 
 <link href="../../css/owfont-regular.css" rel="stylesheet" type="text/css" />
 
-</head>
+</head>x
 <body onload="startTime()">
 
 	<div class="container koboFrame">
 
 		<div class="starter-template koboFont">
 
-            <div class="koboSection">
+            <div>
                 <!-- <span th:text="${koboWeather.dateNow}"></span>
                 <br /> -->
                 <span class="koboHour" id="koboHour"></span>
-                <div class="weatherSection">
-                    <i th:class="${koboWeather.icon}" class="koboImg"></i>
-                    <span th:text="${koboWeather.current}"></span>
-                    <span>°</span>
+                <div>
+                    <i th:class="${koboWeather.icon}"></i>
+                    <span th:text="${koboWeather.current}+'°'" class="koboTemp"></span>
+                    <span th:text="${koboWeather.wind}" class="koboTemp"></span>
                 </div>
             </div>
 
-            <div class="koboSection">
-                <span th:text="${koboWeather.tomorrow}"></span>
+            <div th:each="forecastedKoboDay: ${forecastedKoboDays}">
+                <span th:text="${forecastedKoboDay.date}" class="koboDay"></span>
 
-                <div class="weatherSection">
-                    <i th:class="${koboWeather.iconTomMorning}" class="koboImg"></i>
-                    <span th:text="${koboWeather.minTomorrow}"></span>
-                    <span>° / </span>
-                    <i th:class="${koboWeather.iconTomEvening}" class="koboImg"></i>
-                    <span th:text="${koboWeather.maxTomorrow}"></span>
-                    <span>°</span>
+                <div>
+                    <i th:class="${forecastedKoboDay.iconMorning}"></i>
+                    <span th:text="${forecastedKoboDay.tempMorning}+'°'" class="koboTemp"></span>
+                    <i th:class="${forecastedKoboDay.iconEvening}"></i>
+                    <span th:text="${forecastedKoboDay.tempEvening}+'°'" class="koboTemp"></span>
                 </div>
             </div>
 		</div>

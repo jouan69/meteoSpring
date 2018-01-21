@@ -4,18 +4,16 @@
 	text-align:center;
 }
 .koboFont{
-    font-size:100px;
+    font-size:90px;
     font-family:sans-serif;
 }
 .koboHour{
     font-size:200px;
 }
-.koboImg{
-    width:150px;
+.koboTemp{
+    position:relative;
+    top:-40px;
 }
-.koboSection{
-    margin-bottom:50px;
-}
-.weatherSection{
-    margin:50px;
+.koboDay{
+    font-size:60px;
 }

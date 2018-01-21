@@ -11,7 +11,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.example.model.KoboWeather;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.model.ForecastRoot;
@@ -19,7 +21,7 @@ import com.example.model.WeatherRoot;
 import com.example.model.displayable.DayForecasts;
 import com.example.model.displayable.ForecastForHour;
 
-@Component
+@Repository
 public class ForecastWeatherDaoImpl extends AbstractDao implements ForecastWeatherDao {
 
     final static String prefix = "http://api.openweathermap.org/data/2.5/";
@@ -96,10 +98,10 @@ public class ForecastWeatherDaoImpl extends AbstractDao implements ForecastWeath
         String descr = capitalizeFirstLetter(w.getWeatherEntries()[0].getDescription());
         toReturn.setDescription(descr);
         //
-        Double windHeading = new Double(0);
+        Double windHeading = w.getWind().getDeg();
         toReturn.setWindHeading(windHeading);
         //
-        Double windStrength = new Double(0);
+        Double windStrength = w.getWind().getSpeed();
         toReturn.setWindStrength(windStrength);
         //
         return toReturn;

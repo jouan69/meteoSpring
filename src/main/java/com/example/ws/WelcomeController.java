@@ -30,6 +30,7 @@ public class WelcomeController {
 	public String kobo(Model model) {
 		KoboWeather koboWeather = koboService.getPage();
 		model.addAttribute("koboWeather", koboWeather);
+		model.addAttribute("forecastedKoboDays", koboWeather.getForecastedKoboDays());
 		return "kobo";
 	}
 }
