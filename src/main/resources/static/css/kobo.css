@@ -8,24 +8,28 @@
     font-family:sans-serif;
 }
 .koboHour{
-    font-size:150px;
+    font-size:180px;
 }
 .koboDay{
-    font-size:50px;
-    vertical-align:super;
     margin-right:10px;
+    width:230px;
+}
+.koboTemp{
+    width:115px;
 }
 .koboSubFont{
-    font-size:50px;
+    font-size:55px;
 }
 .todaySection{
-    display:flex;
-    justify-content:center;
-}
-i.owf.nextDaysIcon{
-    font-size:60px;
+    margin-bottom:20px;
 }
 .nextDayLine{
-    display:flex;
-    justify-content:center;
+}
+i.owf.nextDaysIcon{
+    font-size:80px;
+}
+.alignedInlined{
+    display:inline-block;
+    vertical-align:top;
+    margin:-10px;
 }

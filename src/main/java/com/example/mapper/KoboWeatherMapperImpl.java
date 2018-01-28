@@ -14,6 +14,8 @@ import java.util.*;
 @Component
 public class KoboWeatherMapperImpl implements KoboWeatherMapper {
 
+    public static final int MAX_DISPLAYED_DAYS = 4;
+
     @Autowired
     Wind windUtility;
 
@@ -32,7 +34,7 @@ public class KoboWeatherMapperImpl implements KoboWeatherMapper {
         String wind = getWind(nowForecast.getWindHeading(), nowForecast.getWindStrength());
         // tomorrows
         List<ForecastedKoboDay> forecastedKoboDays = new ArrayList<>();
-        for(int i=1;i<=2;i++){
+        for(int i = 1; i<= MAX_DISPLAYED_DAYS; i++){
             forecastedKoboDays.add(getForecasteddDay(forecastDays.get(i), i));
         }
 

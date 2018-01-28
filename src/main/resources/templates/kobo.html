@@ -25,22 +25,22 @@
 
             <!-- Today -->
             <div class="todaySection">
-                <i th:class="${koboWeather.icon}"></i>
-                <span th:text="${koboWeather.current}+'°'"></span>
+                <i th:class="${koboWeather.icon}+' alignedInlined'"></i>
+                <span th:text="${koboWeather.current}+'°'" class="alignedInlined"></span>
 
-                <span th:text="${koboWeather.wind}"></span>
+                <span th:text="${koboWeather.wind}" class="alignedInlined"></span>
             </div>
 
             <!-- Next days -->
             <div th:each="forecastedKoboDay: ${forecastedKoboDays}" class="nextDayLine">
 
-                <span th:text="${forecastedKoboDay.date}" class="koboDay"></span>
+                <span th:text="${forecastedKoboDay.date}" class="koboDay koboSubFont alignedInlined"></span>
 
-                <i th:class="${forecastedKoboDay.iconMorning}+' nextDaysIcon'"></i>
-                <span th:text="${forecastedKoboDay.tempMorning}+'°'" class="koboSubFont"></span>
+                <i th:class="${forecastedKoboDay.iconMorning}+' nextDaysIcon alignedInlined'"></i>
+                <span th:text="${forecastedKoboDay.tempMorning}+'°'" class="koboSubFont koboTemp alignedInlined"></span>
 
-                <i th:class="${forecastedKoboDay.iconEvening}+' nextDaysIcon'"></i>
-                <span th:text="${forecastedKoboDay.tempEvening}+'°'" class="koboSubFont"></span>
+                <i th:class="${forecastedKoboDay.iconEvening}+' nextDaysIcon alignedInlined'"></i>
+                <span th:text="${forecastedKoboDay.tempEvening}+'°'" class="koboSubFont koboTemp alignedInlined"></span>
 
             </div>
 
