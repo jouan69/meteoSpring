@@ -13,34 +13,37 @@
 
 <link href="../../css/owfont-regular.css" rel="stylesheet" type="text/css" />
 
-</head>x
+</head>
 <body onload="startTime()">
 
 	<div class="container koboFrame">
 
 		<div class="starter-template koboFont">
 
-            <div>
-                <!-- <span th:text="${koboWeather.dateNow}"></span>
-                <br /> -->
-                <span class="koboHour" id="koboHour"></span>
-                <div>
-                    <i th:class="${koboWeather.icon}"></i>
-                    <span th:text="${koboWeather.current}+'°'" class="koboTemp"></span>
-                    <span th:text="${koboWeather.wind}" class="koboTemp"></span>
-                </div>
+            <!-- HH:mm -->
+            <span class="koboHour" id="koboHour"></span>
+
+            <!-- Today -->
+            <div class="todaySection">
+                <i th:class="${koboWeather.icon}"></i>
+                <span th:text="${koboWeather.current}+'°'"></span>
+
+                <span th:text="${koboWeather.wind}"></span>
             </div>
 
-            <div th:each="forecastedKoboDay: ${forecastedKoboDays}">
+            <!-- Next days -->
+            <div th:each="forecastedKoboDay: ${forecastedKoboDays}" class="nextDayLine">
+
                 <span th:text="${forecastedKoboDay.date}" class="koboDay"></span>
 
-                <div>
-                    <i th:class="${forecastedKoboDay.iconMorning}"></i>
-                    <span th:text="${forecastedKoboDay.tempMorning}+'°'" class="koboTemp"></span>
-                    <i th:class="${forecastedKoboDay.iconEvening}"></i>
-                    <span th:text="${forecastedKoboDay.tempEvening}+'°'" class="koboTemp"></span>
-                </div>
+                <i th:class="${forecastedKoboDay.iconMorning}+' nextDaysIcon'"></i>
+                <span th:text="${forecastedKoboDay.tempMorning}+'°'" class="koboSubFont"></span>
+
+                <i th:class="${forecastedKoboDay.iconEvening}+' nextDaysIcon'"></i>
+                <span th:text="${forecastedKoboDay.tempEvening}+'°'" class="koboSubFont"></span>
+
             </div>
+
 		</div>
 	</div>
 </body>

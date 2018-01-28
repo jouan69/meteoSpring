@@ -47,7 +47,7 @@ public class KoboWeatherMapperImpl implements KoboWeatherMapper {
     private String getWind(Double windHeading, Double windStrength) {
         String h = windUtility.getHeading(windHeading);
         int b = windUtility.getBeaufort(windStrength);
-        return b+"-"+h;
+        return " - "+b+""+h;
     }
 
     private ForecastedKoboDay getForecasteddDay(DayForecasts dayForecasts, int plusDay){
@@ -56,7 +56,8 @@ public class KoboWeatherMapperImpl implements KoboWeatherMapper {
 
         String tomorrowStr = LocalDate.now()
                 .plusDays(plusDay)
-                .format(DateTimeFormatter.ofPattern("EE dd", Locale.FRENCH));
+                .format(DateTimeFormatter.ofPattern("EEdd", Locale.FRENCH))
+                .replaceAll("\\."," ");
 
         ForecastForHour[] tomorrowForecasts = tomorrow.getForecasts();
 
