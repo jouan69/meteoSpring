@@ -1,25 +1,25 @@
 package com.example.dao;
 
+import com.example.log.LogService;
+import com.example.log.LogServiceFactory;
+import com.example.log.LoggingRequestInterceptor;
+import com.example.model.ForecastRoot;
+import com.example.model.WeatherRoot;
+import com.example.model.displayable.DayForecasts;
+import com.example.model.displayable.ForecastForHour;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.client.RestTemplate;
+
 import java.text.DateFormatSymbols;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TreeMap;
-
-import com.example.model.KoboWeather;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.client.RestTemplate;
-
-import com.example.model.ForecastRoot;
-import com.example.model.WeatherRoot;
-import com.example.model.displayable.DayForecasts;
-import com.example.model.displayable.ForecastForHour;
+import java.util.*;
 
 @Repository
 public class ForecastWeatherDaoImpl extends AbstractDao implements ForecastWeatherDao {
@@ -29,11 +29,25 @@ public class ForecastWeatherDaoImpl extends AbstractDao implements ForecastWeath
     final static String forecast_uri = prefix + "forecast" + suffix;
     String[] dayNames = (new DateFormatSymbols(new Locale("fr"))).getShortWeekdays();
 
+    private LogService logService;
+    private RestTemplate restTemplate;
+
+    @Autowired
+    ForecastWeatherDaoImpl(LogServiceFactory logServiceFactory){
+        logService = logServiceFactory.getLogService(this.getClass().getName());
+
+        // Interceptor resttemplate
+        restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
+        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+        interceptors.add(new LoggingRequestInterceptor(logServiceFactory));
+        restTemplate.setInterceptors(interceptors);
+    }
+
     @Override
     public List<DayForecasts> getForecastDays() {
-        RestTemplate restTemplate = new RestTemplate();
         ForecastRoot forecastRoot = restTemplate.getForObject(forecast_uri, ForecastRoot.class);
-        System.out.println(forecast_uri);
+        logService.info(()->forecast_uri, null);
+        logService.info(forecastRoot, null);
         return toForecasts(forecastRoot);
     }
 

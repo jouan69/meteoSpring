@@ -2,7 +2,10 @@ package com.example.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ForecastRoot {
+import java.util.Arrays;
+import java.util.function.Supplier;
+
+public class ForecastRoot implements Supplier<String> {
 	@JsonProperty("cod")
 	private Long cod;
 	@JsonProperty("message")
@@ -44,4 +47,20 @@ public class ForecastRoot {
 	public void setCity(City city) {
 		this.city = city;
 	}
+
+    @Override
+    public String toString() {
+        return "ForecastRoot{" +
+                "cod=" + cod +
+                ", message=" + message +
+                ", cnt=" + cnt +
+                ", weatherRoots=" + Arrays.toString(weatherRoots) +
+                ", city=" + city +
+                '}';
+    }
+
+    @Override
+    public String get() {
+        return this.toString();
+    }
 }
